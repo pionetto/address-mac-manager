@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/client', "ClientController@list");
+Route::get('/client/register', "ClientController@register");
+Route::post('/client/saving', "ClientController@saving");
+Route::get('/client/edit/{id}', "ClientController@edit");
+Route::post('/client/update/{id}', "ClientController@update");
+Route::get('/client/delete/{id}', "ClientController@delete");
