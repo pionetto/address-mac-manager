@@ -31,6 +31,7 @@
     <tr>
         <td>ID</td>
         <td>Nome</td>
+        <td>Dispositivo</td>
         <td>Matricula</td>
         <td>Secretaria</td>
         <td>Lotação</td>
@@ -41,6 +42,13 @@
     <tr>
         <td>{{ $c->id }}</td>
         <td>{{ $c->name }}</td>
+        <td> 
+            <ul>
+            @foreach ($c->devices as $device)
+                <li>{{ $device->name }}</li>
+            @endforeach
+            </ul>
+        </td>
         <td>{{ $c->regist }}</td>
         <td>{{ $c->secretary }}</td>
         <td>{{ $c->workplace }}</td>
