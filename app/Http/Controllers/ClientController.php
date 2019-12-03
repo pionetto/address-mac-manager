@@ -24,6 +24,22 @@ class ClientController extends Controller
         return view('register');
     }
     
+    public function detailclient($id){
+        $client = Client::find($id);
+        return view('detailclient')->with('client', $client);        
+                //return view('detailclient');
+    }
+    
+    public function assigndevice($id){
+        $devices = Device::find($id);
+        if (empty($devices)){
+            return 'Não existem dispositivos cadastrados';
+            return view('registerdevice')->with('devices', $devices);
+            } else {
+        return view('assigndevice')->with('devices', $devices);        
+        }
+    }
+
     public function edit($id){
         $clients = Client::find($id);
         if (empty($clients)){
