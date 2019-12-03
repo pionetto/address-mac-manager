@@ -113,3 +113,5 @@ class ClientController extends Controller
         return redirect()->action('ClientController@list')->withInput();
     }
 }
+
+
