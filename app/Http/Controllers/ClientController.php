@@ -31,13 +31,15 @@ class ClientController extends Controller
     }
     
     public function assigndevice($id){
-        $devices = Device::find($id);
-        if (empty($devices)){
-            return 'Não existem dispositivos cadastrados';
-            return view('registerdevice')->with('devices', $devices);
-            } else {
-        return view('assigndevice')->with('devices', $devices);        
-        }
+        $client = Client::find($id);
+
+        $device = new Device;
+        
+        $device->name = Request::input('name');
+        $device->type = Request::input('type');
+        $device->device = Request::input('device');
+
+        return view('assigndevice');        
     }
 
     public function edit($id){
@@ -113,5 +115,3 @@ class ClientController extends Controller
         return redirect()->action('ClientController@list')->withInput();
     }
 }
-
-
