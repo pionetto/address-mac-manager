@@ -5,7 +5,6 @@
 <h3>Cadastro Dispositivos - {{ $devices->id }} </h3>
 <form action="{{ action("ClientController@assigndevice", $devices->id) }}" method="GET">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <input type="hidden" name="update" value="update">
     <div class="form-group">
         <label>Nome:</label>
         <label> {{ $devices->name }} </label>

@@ -6,9 +6,13 @@ use Request;
 
 use App\Http\Requests;
 
+use Illuminate\Http\Request as RequestConcrete;
+
 use Illuminate\Support\Facades\DB;
 
 use App\Client;
+
+use App\Device;
 
 use Validator;
 
@@ -30,16 +34,35 @@ class ClientController extends Controller
                 //return view('detailclient');
     }
     
-    public function assigndevice($id){
-        $client = Client::find($id);
+    public function savedevice(RequestConcrete $request, $id){
 
-        $device = new Device;
+        // $name = Request::input('name');
+        // $type = Request::input('type');
+        // $device = Request::input('device');
+
+        $request['client_id'] = $id;
         
-        $device->name = Request::input('name');
-        $device->type = Request::input('type');
-        $device->device = Request::input('device');
+        // dd(
+        //     $request->all()
+        // );
 
-        return view('assigndevice');        
+        
+
+        $devices = Device::create($request->all());
+        
+        // $devices = new Device();
+        // $devices->name = $name;
+        // $devices->type = $type;
+        // $devices->device = $device;
+        // $devices->client_id = $id;
+        // // dd($devices);
+        // $devices->save();
+
+        if (!$devices) {
+            return redirect()->back()->withInput();
+        }
+
+        return redirect()->back();
     }
 
     public function edit($id){
