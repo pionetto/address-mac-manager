@@ -120,7 +120,7 @@ class ClientController extends Controller
         $device->fill($request->all());
         $device->save();
 
-        return redirect()->action('ClientController@detailclient', $device->client_id);
+        return redirect()->action('ClientController@detailclient', $device->owner->id);
     }
 
 /*    public function apagar($id){
