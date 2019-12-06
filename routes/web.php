@@ -27,3 +27,6 @@ Route::get('/client/devicelist', "ClientController@devicelist");
 Route::get('/client/assigndevice/{id}', "ClientController@assigndevice");
 Route::post('/client/savedevice/{device}', "ClientController@savedevice");
 Route::get('/client/registerdevice', "ClientController@registerdevice");
+Route::get('/client/deletedevice/{id}', "ClientController@deletedevice");
+Route::post('/client/updatedevice/{id}', "ClientController@updatedevice");
+Route::get('/client/editdevice/{id}', "ClientController@editdevice");

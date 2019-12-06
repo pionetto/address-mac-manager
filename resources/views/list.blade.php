@@ -7,7 +7,6 @@
         if (window.confirm('Deseja realmente apagar?')){
             window.location = url;
         }
-
     }
 </script>
 
