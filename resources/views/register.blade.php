@@ -14,7 +14,7 @@
         </div>
 @endif
 
-<form action="{{action("ClientController@saving") }}" method="POST">
+<form action="{{action("ClientController@store") }}" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="insert" value="insert">
     <div class="form-group">

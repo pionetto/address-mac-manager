@@ -4,7 +4,8 @@
 
 <h3>Editar Cadastro - {{ $clients->id }} </h3>
 <form action="{{ action("ClientController@update", $clients->id) }}" method="POST">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        @method('PUT')
+        @csrf
         <input type="hidden" name="update" value="update">
     <div class="form-group">
         <label>Nome:</label>

@@ -2,137 +2,45 @@
 
 namespace App\Http\Controllers;
 
-use Request;
-
-use App\Http\Requests;
-
-use Illuminate\Http\Request as RequestConcrete;
-
-use Illuminate\Support\Facades\DB;
-
+use Illuminate\Http\Request;
 use App\Client;
-
-use App\Device;
-
 use Validator;
 
 class ClientController extends Controller
 {
-    public function list(){
-
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
         $clients = Client::all();
         return view('list')->with('clients', $clients);
     }
-    
-    public function register(){
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
         return view('register');
     }
-    
-    public function detailclient($id){
-        $client = Client::find($id);
-        return view('detailclient')->with('client', $client);        
-                //return view('detailclient');
-    }
-    
-    public function savedevice(RequestConcrete $request, $id){
 
-        // $name = Request::input('name');
-        // $type = Request::input('type');
-        // $device = Request::input('device');
-
-        $request['client_id'] = $id;
-        
-        // dd(
-        //     $request->all()
-        // );
-
-        
-
-        $devices = Device::create($request->all());
-        
-        // $devices = new Device();
-        // $devices->name = $name;
-        // $devices->type = $type;
-        // $devices->device = $device;
-        // $devices->client_id = $id;
-        // // dd($devices);
-        // $devices->save();
-
-        if (!$devices) {
-            return redirect()->back()->withInput();
-        }
-
-        return redirect()->back();
-    }
-
-    public function edit($id){
-        $clients = Client::find($id);
-        if (empty($clients)){
-            return 'Cliente não existe';
-            } else {
-                return view('edit')->with('clients', $clients);
-        }
-    }
-
-    public function editdevice($id){
-        $device = Device::find($id);
-        if (empty($device)){
-            return 'Dispositivo não existe';
-            } else {
-                return view('editdevice')->with('device', $device);
-        }
-    }    
-
-    public function delete($id){
-        $clients = Client::find($id);
-        $clients->delete();
-        
-        return redirect()->action('ClientController@list');
-    }
-
-    public function deletedevice($id){
-        $device = Device::find($id);
-        $device->delete();
-        
-        return redirect()->back();
-    }
-
-    public function update($id){
-        $name = Request::input('name');
-        $regist = Request::input('regist');
-        $secretary = Request::input('secretary');
-        $workplace = Request::input('workplace');
-        
-        $clients = Client::find($id);
-        $clients->name = $name;
-        $clients->regist = $regist;
-        $clients->secretary = $secretary;
-        $clients->workplace = $workplace;
-        $clients->save();
-
-        return redirect()->action('ClientController@list')->withInput();
-    }
-
-    public function updatedevice(RequestConcrete $request, $id){
-
-        is_null($request->enable) ? $request['enable'] = false : $request['enable'] = true;
-        $device = Device::find($id);
-        $device->fill($request->all());
-        $device->save();
-
-        return redirect()->action('ClientController@detailclient', $device->owner->id);
-    }
-
-/*    public function apagar($id){
-        $id = Request::delete();        
-        return view('apagar');
-    }    */
-
-    public function saving(){
-        $name = Request::input('name');
-        $regist = Request::input('regist');
-        $secretary = Request::input('secretary');
-        $workplace = Request::input('workplace');
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $name = $request->name;
+        $regist = $request->regist;
+        $secretary = $request->secretary;
+        $workplace = $request->workplace;
 
         $validator = Validator::make(
             [
@@ -153,7 +61,7 @@ class ClientController extends Controller
                 'min' => ':attribute precisa ter pelo menos 6 caracteres.'            ]
             );
             if ($validator->fails()){
-                return redirect()->action('ClientController@register')->withErrors($validator)->withInput();
+                return redirect()->action('ClientController@create')->withErrors($validator)->withInput();
             }
 
         $clients = new Client();
@@ -163,6 +71,68 @@ class ClientController extends Controller
         $clients->workplace = $workplace;
         $clients->save();
 
-        return redirect()->action('ClientController@list')->withInput();
+        return redirect()->action('ClientController@index')->withInput();
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $client = Client::find($id);
+        return view('detailclient')->with('client', $client);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $clients = Client::find($id);
+        return view('edit')->with(compact('clients'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $name = $request->name;
+        $regist = $request->regist;
+        $secretary = $request->secretary;
+        $workplace = $request->workplace;
+        
+        $clients = Client::find($id);
+        $clients->name = $name;
+        $clients->regist = $regist;
+        $clients->secretary = $secretary;
+        $clients->workplace = $workplace;
+        $clients->save();
+        
+        return redirect()->action('ClientController@index')->withInput();
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $clients = Client::find($id);
+        $clients->delete();
+        
+        return redirect()->action('ClientController@index');
     }
 }
