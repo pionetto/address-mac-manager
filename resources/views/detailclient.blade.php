@@ -21,8 +21,9 @@
     </div>
 
     <h3>Cadastro Dispositivos </h3>
-{{-- <form action="{{action("ClientController@savedevice", $client->id) }}" method="POST"> --}}
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+<form action="{{action("DeviceController@store") }}" method="POST">
+    <input type="hidden" name="client_id" value="{{ $client->id }}">
+    @csrf
     <div class='row'>
         <div class="form-group col-3" >
         <label>Nome:</label>
@@ -77,11 +78,15 @@
             <td>{{ $device->type }}</td>
             <td>{{ $device->device }}</td>
             <td>{{ $device->enable ? 'Ativo':'Inativo' }}</td>
-            {{-- <td><a class="btn btn-small btn-info" href="{{ action("ClientController@editdevice", $device->id) }}">Editar</a></td> --}}
-            {{-- <td><a class="btn btn-small btn-danger" href="#" onclick="deletar('{{ action("ClientController@deletedevice", $device->id) }}');">Apagar</a></td> --}}
+            <td><a class="btn btn-small btn-info" href="{{ action("DeviceController@edit", $device->id) }}">Editar</a></td>
+            <td>
+                <form action="{{ action("DeviceController@destroy", $device->id) }}" method="POST">
+                    @method('DELETE')
+                    @csrf
+                    <button type="submit" class="btn btn-small btn-danger">Apagar</button>
+                </form>
+            </td>
         </tr>
     @endforeach
     </table>
-    
-    {{-- <td><a class="btn btn-small btn-info" href="{{ action("ClientController@register") }}">Cadastro</a></td> --}}
 @stop
