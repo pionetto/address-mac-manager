@@ -42,12 +42,18 @@
         <td>{{ $client->name }}</td>
         <td>{{ $client->regist }}</td>
         <td><a class="btn btn-small btn-info" href="{{ action("ClientController@edit", $client->id) }}">Editar</a></td>
-        <td><a class="btn btn-small btn-danger" href="#" onclick="deletar('{{ action("ClientController@delete", $client->id) }}');">Apagar</a></td>
-        <td><a class="btn btn-secondary href=" href="{{ action("ClientController@detailclient", $client->id) }}">Ver</a></td>
+        <td>
+            <form  action="{{ action("ClientController@destroy", $client->id) }}" method="POST">
+                @method('DELETE')
+                @csrf
+                <button type="submit" class="btn btn-small btn-danger">Apagar</button>
+            </form>
+        </td>
+        <td><a class="btn btn-secondary href=" href="{{ action("ClientController@show", $client->id) }}">Ver</a></td>
     </tr>
 @endforeach
 </table>
 
-<td><a class="btn btn-small btn-info" href="{{ action("ClientController@register") }}">Cadastro</a></td>
+<td><a class="btn btn-small btn-info" href="{{ action("ClientController@create") }}">Cadastro</a></td>
 
 @stop
