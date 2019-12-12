@@ -16,7 +16,7 @@ class ClientController extends Controller
     public function index()
     {
         $clients = Client::all();
-        return view('list')->with('clients', $clients);
+        return view('client.index')->with('clients', $clients);
     }
 
     /**
@@ -26,7 +26,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        return view('register');
+        return view('client.create');
     }
 
     /**
@@ -83,7 +83,7 @@ class ClientController extends Controller
     public function show($id)
     {
         $client = Client::find($id);
-        return view('detailclient')->with('client', $client);
+        return view('client.show')->with('client', $client);
     }
 
     /**
@@ -95,7 +95,7 @@ class ClientController extends Controller
     public function edit($id)
     {
         $clients = Client::find($id);
-        return view('edit')->with(compact('clients'));
+        return view('client.edit')->with(compact('clients'));
     }
 
     /**

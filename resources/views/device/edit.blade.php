@@ -3,9 +3,9 @@
 @section('content')
 
 <h3>Editar Dispositivo - {{ $device->id }} </h3>
-<form action="{{ action("ClientController@updatedevice", $device->id) }}" method="POST">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <input type="hidden" name="update" value="update">
+<form action="{{ action("DeviceController@update", $device->id) }}" method="POST">
+        @csrf
+        @method('PUT')
     <div class="form-group">
         <label>Nome:</label>
     <input type="text" name="name" class="form-control" value="{{ $device->name }}">
