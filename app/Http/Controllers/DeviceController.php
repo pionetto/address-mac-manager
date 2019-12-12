@@ -67,7 +67,7 @@ class DeviceController extends Controller
         if (empty($device)){
             return 'Dispositivo não existe';
             } else {
-                return view('editdevice')->with('device', $device);
+                return view('device.edit')->with('device', $device);
         }
     }
 
@@ -84,8 +84,7 @@ class DeviceController extends Controller
         $device = Device::find($id);
         $device->fill($request->all());
         $device->save();
-
-        return redirect()->action('ClientController@detailclient', $device->owner->id);
+        return redirect()->action('ClientController@show', $device->owner->id);
     }
 
     /**
