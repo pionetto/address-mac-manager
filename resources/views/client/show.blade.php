@@ -21,35 +21,12 @@
     </div>
 
     <h3>Cadastro Dispositivos </h3>
-<form action="{{action("DeviceController@store") }}" method="POST">
+<form class="form-row" action="{{action("DeviceController@store") }}" method="POST">
     <input type="hidden" name="client_id" value="{{ $client->id }}">
-    @csrf
-    <div class='row'>
-        <div class="form-group col-3" >
-        <label>Nome:</label>
-        <input type="text" name="name" class="form-control" value="{{ old('name') }}">
-    </div>
-    <div class="form-group col-3" >
-        <label>Tipo:</label>
-        <input type="text" name="type" class="form-control"  value="{{ old('type') }}">
-    </div>
-    <div class="form-group col-3" >
-        <label>Mac:</label>
-        <input type="text" name="device" class="form-control"  value="{{ old('device') }}">    
-    </div>
+    @include('device._form')
     <button type="submit" class="btn btn-success col-3" >Cadastrar</button>
-    </div>
-    
-    
+
 </form>
-    {{-- <ul>
-        <label>Dispositivo Associado:</label>
-        @forelse ($client->devices as $device)
-            <li>{{ $device->name }}</li>
-        @empty
-            <li>Nenhum dispositivo associado</li>
-        @endforelse
-    </ul> --}}
 
     <script type="text/javascript">
         function deletar(url) {
