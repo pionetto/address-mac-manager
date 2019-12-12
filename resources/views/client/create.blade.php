@@ -1,4 +1,4 @@
-@extends('principal')
+@extends('layouts.principal')
 @section('title', 'Cadastrar Cliente')
 @section('content')
 

@@ -1,5 +1,5 @@
-@extends('principal')
-@section('title', 'Listagem de Clientes')
+@extends('layouts.principal')
+{{-- @section('title', 'Listagem de Clientes') --}}
 @section('content')
 
 <script type="text/javascript">
