@@ -12,19 +12,9 @@
 
 <h3>Lista de Clientes e Address Mac's</h3>
 
-@if(old('insert'))
-    <div class="alert alert-success">
-        <strong>Sucesso</strong>
-            {{ old('descricao')}} cadastrado!
-    </div>
-@endif
-
-@if(old('update'))
-    <div class="alert alert-success">
-        <strong>Sucesso</strong>
-            {{ old('descricao')}} alterado!
-    </div>
-@endif
+@component('components.alert', ['state'=>'success', 'title'=>'Sucesso'])
+    Qualquer texto aqui dentro
+@endcomponent
 
 <table width="100%" class="table table-striped table-bordered table-hover">
     <tr>

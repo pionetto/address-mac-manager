@@ -3,16 +3,7 @@
 @section('content')
 
 <h3>Cadastro de Clientes</h3>
- @if (count($errors) > 0 )
-        <div class="alert alert-danger">
-        <strong> Erros: </strong>
-            <ul>
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-@endif
+@include('helpers.alert-error')
 
 <form action="{{action("ClientController@store") }}" method="POST">
     @include('client._form')
