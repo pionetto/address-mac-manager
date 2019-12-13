@@ -31,19 +31,19 @@
         <td>{{ $client->id }}</td>
         <td>{{ $client->name }}</td>
         <td>{{ $client->regist }}</td>
-        <td><a class="btn btn-small btn-info" href="{{ action("ClientController@edit", $client->id) }}">Editar</a></td>
+        <td><a class="btn btn-small btn-info" href="{{ route('client.edit', $client->id) }}">Editar</a></td>
         <td>
-            <form  action="{{ action("ClientController@destroy", $client->id) }}" method="POST">
+            <form  action="{{ route('client.destroy', $client->id) }}" method="POST">
                 @method('DELETE')
                 @csrf
                 <button type="submit" class="btn btn-small btn-danger">Apagar</button>
             </form>
         </td>
-        <td><a class="btn btn-secondary href=" href="{{ action("ClientController@show", $client->id) }}">Ver</a></td>
+        <td><a class="btn btn-secondary href=" href="{{ route('client.show', $client->id) }}">Ver</a></td>
     </tr>
 @endforeach
 </table>
 
-<td><a class="btn btn-small btn-info" href="{{ action("ClientController@create") }}">Cadastro</a></td>
+<td><a class="btn btn-small btn-info" href="{{ route('client.create') }}">Cadastro</a></td>
 
 @stop

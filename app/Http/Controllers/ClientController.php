@@ -61,7 +61,7 @@ class ClientController extends Controller
                 'min' => ':attribute precisa ter pelo menos 6 caracteres.'            ]
             );
             if ($validator->fails()){
-                return redirect()->action('ClientController@create')->withErrors($validator)->withInput();
+                return redirect()->back()->withErrors($validator)->withInput();
             }
 
         $clients = new Client();
@@ -71,7 +71,10 @@ class ClientController extends Controller
         $clients->workplace = $workplace;
         $clients->save();
 
-        return redirect()->action('ClientController@index')->withInput();
+        return redirect()->route('client.index')->with('data', [
+            'status' => 'success',
+            'message' => 'Cliente adicionado com sucesso',
+        ]);
     }
 
     /**
@@ -119,7 +122,7 @@ class ClientController extends Controller
         $clients->workplace = $workplace;
         $clients->save();
         
-        return redirect()->action('ClientController@index')->withInput();
+        return redirect()->route('client.index')->withInput();
     }
 
     /**
@@ -133,6 +136,6 @@ class ClientController extends Controller
         $clients = Client::find($id);
         $clients->delete();
         
-        return redirect()->action('ClientController@index');
+        return redirect()->route('client.index');
     }
 }
