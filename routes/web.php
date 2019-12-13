@@ -1,16 +1,23 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::resource('/clientes', 'ClientController')
+->names([
+    'index'=> 'client.index',
+    'create'=> 'client.create',
+    'store'=>  'client.store',
+    'edit'=>  'client.edit',
+    'update'=>  'client.update',
+    'destroy'=>  'client.destroy',
+    'show'=>  'client.show',
+]);
 
-Route::resource('/client', 'ClientController');
-
-Route::resource('/device', 'DeviceController');
+Route::resource('/dispositivos', 'DeviceController')
+->names([
+    'index'=> 'device.index',
+    'create'=> 'device.create',
+    'store'=>  'device.store',
+    'edit'=>  'device.edit',
+    'update'=>  'device.update',
+    'destroy'=>  'device.destroy',
+    'show'=>  'device.show',
+]);

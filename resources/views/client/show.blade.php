@@ -21,7 +21,7 @@
     </div>
 
     <h3>Cadastro Dispositivos </h3>
-<form class="form-row" action="{{action("DeviceController@store") }}" method="POST">
+<form class="form-row" action="{{route("client.store") }}" method="POST">
     <input type="hidden" name="client_id" value="{{ $client->id }}">
     @include('device._form')
     <button type="submit" class="btn btn-success col-3" >Cadastrar</button>
@@ -55,9 +55,9 @@
             <td>{{ $device->type }}</td>
             <td>{{ $device->device }}</td>
             <td>{{ $device->enable ? 'Ativo':'Inativo' }}</td>
-            <td><a class="btn btn-small btn-info" href="{{ action("DeviceController@edit", $device->id) }}">Editar</a></td>
+            <td><a class="btn btn-small btn-info" href="{{ route("client.edit", $device->id) }}">Editar</a></td>
             <td>
-                <form action="{{ action("DeviceController@destroy", $device->id) }}" method="POST">
+                <form action="{{ route("client.destroy", $device->id) }}" method="POST">
                     @method('DELETE')
                     @csrf
                     <button type="submit" class="btn btn-small btn-danger">Apagar</button>

@@ -84,7 +84,7 @@ class DeviceController extends Controller
         $device = Device::find($id);
         $device->fill($request->all());
         $device->save();
-        return redirect()->action('ClientController@show', $device->owner->id);
+        return redirect()->route('client.show', $device->owner->id);
     }
 
     /**
