@@ -2,6 +2,8 @@
 @section('title', 'Detalhes Cadastro')
 @section('content')
 
+<a class="btn btn-default" href="{{ route('client.index') }}">Voltar</a>
+<hr>
 <h3>Detalhes Cadastro - {{ $client->id }} </h3>
     <div class="form-group">
         <label>Nome:</label>

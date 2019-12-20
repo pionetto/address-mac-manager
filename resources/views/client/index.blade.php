@@ -17,21 +17,25 @@
 @endcomponent
 
 <table width="100%" class="table table-striped table-bordered table-hover">
-    <tr>
+    <tr class="text-center">
         <td>ID</td>
         <td>Nome</td>
         <td>Matricula</td>
+        <td>Qtd</td>
         <td>Editar</td>
         <td>Apagar</td>
         <td>Ver</td>
 
     </tr>
 @foreach ($clients as $client)
-    <tr>
+    <tr class="text-center">
         <td>{{ $client->id }}</td>
-        <td>{{ $client->name }}</td>
+        <td class="text-left">{{ $client->name }}</td>
         <td>{{ $client->regist }}</td>
-        <td><a class="btn btn-small btn-info" href="{{ route('client.edit', $client->id) }}">Editar</a></td>
+        <td>{{ $client->devices->count() }}</td>
+        <td>
+            <a class="btn btn-small btn-info" href="{{ route('client.edit', $client->id) }}">Editar</a>
+        </td>
         <td>
             <form  action="{{ route('client.destroy', $client->id) }}" method="POST">
                 @method('DELETE')
