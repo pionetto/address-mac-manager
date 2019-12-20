@@ -35,6 +35,8 @@ class DeviceController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validateCheckboxInput($request);
+
         $devices = Device::create($request->all());
 
         if (!$devices) {
@@ -80,7 +82,8 @@ class DeviceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        is_null($request->enable) ? $request['enable'] = false : $request['enable'] = true;
+        $this->validateCheckboxInput($request);
+
         $device = Device::find($id);
         $device->fill($request->all());
         $device->save();
@@ -99,5 +102,14 @@ class DeviceController extends Controller
         $device->delete();
         
         return redirect()->back();
+    }
+    
+    private function validateCheckboxInput($request)
+    {
+        if ($request->enable == 'on'){
+            return $request['enable'] = true;
+        } else {
+            return $request['enable'] = false;
+        }
     }
 }
