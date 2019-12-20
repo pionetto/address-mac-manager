@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Client;
 use Validator;
+use App\Http\Requests\ClientRequest;
 
 class ClientController extends Controller
 {
@@ -35,34 +36,12 @@ class ClientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClientRequest $request)
     {
         $name = $request->name;
         $regist = $request->regist;
         $secretary = $request->secretary;
         $workplace = $request->workplace;
-
-        $validator = Validator::make(
-            [
-                'Nome' => $name,
-                'Matricula' => $regist,
-                'Secretaria' => $secretary,
-                'Lotação' => $workplace
-            ],
-            [
-                'Nome' => 'required|min:3',
-                'Matricula' => 'required|numeric',
-                'Secretaria' => 'required|min:3',
-                'Lotação' => 'required|min:3'
-            ],
-            [
-                'required' => ':attribute é obrigatório.',
-                'numeric' => ':attribute precisa ser numérico.',
-                'min' => ':attribute precisa ter pelo menos 6 caracteres.'            ]
-            );
-            if ($validator->fails()){
-                return redirect()->back()->withErrors($validator)->withInput();
-            }
 
         $clients = new Client();
         $clients->name = $name;
@@ -108,7 +87,7 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ClientRequest $request, $id)
     {
         $name = $request->name;
         $regist = $request->regist;

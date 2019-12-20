@@ -1,4 +1,4 @@
-@extends('layouts.principal')
+@extends('principal')
 @section('title', 'Editar Dispositivo')
 @section('content')
 
