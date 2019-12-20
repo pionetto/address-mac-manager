@@ -19,7 +19,8 @@ class CreateDevicesTable extends Migration
             $table->foreign('client_id')
                     ->references('id')       
                     ->on('clients')
-                    ->onDelete('cascade');
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
             $table->string('name');
             $table->string('type');
             $table->boolean('enable')->default(true);
